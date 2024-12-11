@@ -1,5 +1,8 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { addToStporedList } from "./Pages/AddToDBList";
+
+
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -19,14 +22,23 @@ const BookDetails = () => {
     totalPages,
     rating,
   } = book;
+
+  const handleMarkAsRead = (id) =>{
+    addToStporedList(id)
+  }
+
+  const handleAddToWishList = (id) =>{
+    addToStopWishList(id)
+  }
   return (
     <div className="flex flex-row gap-10 text-start mb-24">
       <div className="p-12 bg-gray-200 rounded-xl">
-        <img className="w-28 " src={image} alt={bookName} />
+        <img className="w-50" src={image} alt={bookName} />
       </div>
+
       <div className="space-y-3">
         <p className="text-4xl font-bold o ">{bookName}</p>
-        <p className="text-xl">By: {author}</p>
+        <p className="text-md font-bold">By: {author}</p>
         <div className="border"></div>
         <p>{category}</p>
         <div className="border"></div>
@@ -34,7 +46,6 @@ const BookDetails = () => {
           <span className="font-bold">Review: </span> {review}
         </p>
         <div className="space-x-2">
-          {" "}
           <span className="font-bold text-xl">Tag </span>
           {tags.map((tag, index) => (
             <button
@@ -60,7 +71,12 @@ const BookDetails = () => {
             <span className="font-bold">{rating}</span>
           </div>
         </div>
+        <div>
+        <button onClick={() => handleMarkAsRead (bookId)} className="btn btn-outline mr-4 btn-accent">Mark as Read</button>
+        <button onClick={() => handleAddToWishList(bookId)} className="btn btn-accent">Add to Wishlist</button>
       </div>
+      </div>
+     
     </div>
   );
 };

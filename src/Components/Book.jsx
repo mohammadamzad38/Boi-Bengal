@@ -9,7 +9,7 @@ const Book = ({ book }) => {
         <figure className="bg-gray-300 py-8 rounded-2xl">
           <img src={image} className="h-[166px]" alt={bookName} />
         </figure>
-        <div className="card-body">
+        <div className="card-body flex flex-grow">
           <div className="flex gap-3 ">
             {tags.map((tag, index) => (
               <button key={index} className="btn btn-xs text-green-800 bg-green-200">
